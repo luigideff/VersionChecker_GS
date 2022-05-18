@@ -9,6 +9,7 @@ using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using System.Timers;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Main
 {
@@ -30,10 +31,25 @@ namespace Main
         private const string CREARN = @"C:\HBSIS\Sistemas\BackOffice_CREARN\bin\HBSIS.Conselho.BLL.Financeiro.dll";
         private const string CREFITOSE = @"C:\HBSIS\Sistemas\BRConselhos_CREFITO17_SE\bin\HBSIS.Conselho.BLL.Financeiro.dll";
         private const string ONR = @"C:\HBSIS\Sistemas\ONR\Producao\BRCTotal_ONR\bin\HBSIS.Conselho.BLL.Financeiro.dll";
+        private const string CRPBA = @"C:\BRCTotal\Sistemas\BRCTotal_CRP03BA\bin\HBSIS.Conselho.BLL.Financeiro.dll";
+        private const string CRPPE = @"C:\BRCTotal\Sistemas\BRCTotal_CRP02PE\bin\HBSIS.Conselho.BLL.Financeiro.dll";
+        private const string CRPSP = @"C:\BRCTotal\Sistemas\BRCTotal_CRP06SP\bin\HBSIS.Conselho.BLL.Financeiro.dll";
+        private const string CRPRS = @"C:\BRCTotal\Sistemas\BRCTotal_CRP07RS\bin\HBSIS.Conselho.BLL.Financeiro.dll";
+        private const string CRPPR = @"C:\BRCTotal\Sistemas\BRCTotal_CRP08PR\bin\HBSIS.Conselho.BLL.Financeiro.dll";
+        private const string CRPSC = @"C:\BRCTotal\Sistemas\BRCTotal_CRP12SC\bin\HBSIS.Conselho.BLL.Financeiro.dll";
+        private const string CRPMS = @"C:\BRCTotal\Sistemas\BRCTotal_CRP14MS\bin\HBSIS.Conselho.BLL.Financeiro.dll";
+        private const string CRPACRO = @"C:\BRCTotal\Sistemas\BRCTotal_CRP24ACRO\bin\HBSIS.Conselho.BLL.Financeiro.dll";
         private static Timer TicTock;
+
+        [DllImport("User32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool ShowWindow([In] IntPtr hWnd, [In] int nCmdShow);
 
         public static async Task Main(string[] args)
         {
+            IntPtr handle = Process.GetCurrentProcess().MainWindowHandle;
+            ShowWindow(handle, 6);
+           
             Console.WriteLine("Atualizando planilha de versão dos clientes...");
             await AtualizarPlanilha();
             //SetTimer();
@@ -306,6 +322,149 @@ namespace Main
                 var response = await update.ExecuteAsync();
             }
 
+            if (GetFileVersion(ONR) != "O caminho especificado não aponta para um arquivo válido.")
+            {
+                string WriteRange = "A14:C14";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
+            {
+                "CRP BA",
+                GetFileVersion(CRPBA),
+                GetFileModDate(CRPBA)
+            } }
+                };
+
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
+
+            if (GetFileVersion(ONR) != "O caminho especificado não aponta para um arquivo válido.")
+            {
+                string WriteRange = "A15:C15";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
+            {
+                "CRP PE",
+                GetFileVersion(CRPPE),
+                GetFileModDate(CRPPE)
+            } }
+                };
+
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
+
+            if (GetFileVersion(ONR) != "O caminho especificado não aponta para um arquivo válido.")
+            {
+                string WriteRange = "A16:C16";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
+            {
+                "CRP SP",
+                GetFileVersion(CRPSP),
+                GetFileModDate(CRPSP)
+            } }
+                };
+
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
+
+            if (GetFileVersion(ONR) != "O caminho especificado não aponta para um arquivo válido.")
+            {
+                string WriteRange = "A17:C17";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
+            {
+                "CRP RS",
+                GetFileVersion(CRPRS),
+                GetFileModDate(CRPRS)
+            } }
+                };
+
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
+
+            if (GetFileVersion(ONR) != "O caminho especificado não aponta para um arquivo válido.")
+            {
+                string WriteRange = "A18:C18";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
+            {
+                "CRP PR",
+                GetFileVersion(CRPPR),
+                GetFileModDate(CRPPR)
+            } }
+                };
+
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
+
+            if (GetFileVersion(ONR) != "O caminho especificado não aponta para um arquivo válido.")
+            {
+                string WriteRange = "A19:C19";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
+            {
+                "CRP SC",
+                GetFileVersion(CRPSC),
+                GetFileModDate(CRPSC)
+            } }
+                };
+
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
+
+            if (GetFileVersion(ONR) != "O caminho especificado não aponta para um arquivo válido.")
+            {
+                string WriteRange = "A20:C20";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
+            {
+                "CRP MS",
+                GetFileVersion(CRPMS),
+                GetFileModDate(CRPMS)
+            } }
+                };
+
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
+
+            if (GetFileVersion(ONR) != "O caminho especificado não aponta para um arquivo válido.")
+            {
+                string WriteRange = "A21:C21";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
+            {
+                "CRP ACRO",
+                GetFileVersion(CRPACRO),
+                GetFileModDate(CRPACRO)
+            } }
+                };
+
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
         }
         private static void SetTimer()
