@@ -26,8 +26,10 @@ namespace Main
         private const string CORECONGO = @"C:\HBSIS\Sistemas\COFECON\Producao\BRCTotal_CORECONGO18\bin\HBSIS.Conselho.BLL.Financeiro.dll";
         private const string CORECONRR = @"C:\HBSIS\Sistemas\COFECON\Producao\BRCTotal_CORECONRR27\bin\HBSIS.Conselho.BLL.Financeiro.dll";
         private const string CORECONRS = @"C:\HBSIS\Sistemas\COFECON\Producao\BRCTotal_CORECONRS04\bin\HBSIS.Conselho.BLL.Financeiro.dll";
+        private const string CORECONPE = @"C:\HBSIS\Sistemas\COFECON\Producao\BRCTotal_CORECONPE03\bin\HBSIS.Conselho.BLL.Financeiro.dll";
         private const string CREARN = @"C:\HBSIS\Sistemas\BackOffice_CREARN\bin\HBSIS.Conselho.BLL.Financeiro.dll";
         private const string CREFITOSE = @"C:\HBSIS\Sistemas\BRConselhos_CREFITO17_SE\bin\HBSIS.Conselho.BLL.Financeiro.dll";
+        private const string ONR = @"C:\HBSIS\Sistemas\ONR\Producao\BRCTotal_ONR\bin\HBSIS.Conselho.BLL.Financeiro.dll";
         private static Timer TicTock;
 
         public static async Task Main(string[] args)
@@ -209,9 +211,9 @@ namespace Main
             {
                 Values = new List<IList<object>> { new List<object>
             {
-                "CREA-RN",
-                GetFileVersion(CREARN),
-                GetFileModDate(CREARN)
+                "CORECON PE",
+                GetFileVersion(CORECONPE),
+                GetFileModDate(CORECONPE)
             } }
             };
             update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
@@ -223,9 +225,37 @@ namespace Main
             {
                 Values = new List<IList<object>> { new List<object>
             {
+                "CREA-RN",
+                GetFileVersion(CREARN),
+                GetFileModDate(CREARN)
+            } }
+            };
+            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+            response = await update.ExecuteAsync();
+
+            WriteRange = "A12:C12";
+            valueRange = new ValueRange
+            {
+                Values = new List<IList<object>> { new List<object>
+            {
                 "CREFITO-SE",
                 GetFileVersion(CREFITOSE),
                 GetFileModDate(CREFITOSE)
+            } }
+            };
+            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+            response = await update.ExecuteAsync();
+
+            WriteRange = "A13:C13";
+            valueRange = new ValueRange
+            {
+                Values = new List<IList<object>> { new List<object>
+            {
+                "ONR",
+                GetFileVersion(ONR),
+                GetFileModDate(ONR)
             } }
             };
             update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
