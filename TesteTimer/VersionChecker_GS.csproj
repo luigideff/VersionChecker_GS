@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+    <Authors>Luigi Fiamoncini</Authors>
+    <Copyright>Luigi Fiamoncini</Copyright>
+    <Product>VersionChecker_GS</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.Sheets.v4" Version="1.57.0.2657" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="gscred.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
