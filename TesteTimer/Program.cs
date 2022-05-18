@@ -54,7 +54,7 @@ namespace Main
         static async Task AtualizarPlanilha()
         {
 
-            var serviceValues = GetSheetsService().Spreadsheets.Values;                     
+            var serviceValues = GetSheetsService().Spreadsheets.Values;
             await WriteAsync(serviceValues);
         }
 
@@ -67,7 +67,7 @@ namespace Main
             {
                 var serviceInitializer = new BaseClientService.Initializer
                 {
-                    HttpClientInitializer = GoogleCredential.FromStream(stream).CreateScoped(Scopes)                  
+                    HttpClientInitializer = GoogleCredential.FromStream(stream).CreateScoped(Scopes)
 
                 };
                 return new SheetsService(serviceInitializer);
@@ -95,181 +95,224 @@ namespace Main
             }
         }
 
-        
+
 
         private static async Task WriteAsync(SpreadsheetsResource.ValuesResource valuesResource)
         {
-            string WriteRange = "A2:C2";
-            var valueRange = new ValueRange { Values = new List<IList<object>> { new List<object> 
-            { 
-                "CORECON RJ", 
+           
+            if (GetFileVersion(CORECONRJ) != "O caminho especificado não aponta para um arquivo válido.")
+            {
+                string WriteRange = "A2:C2";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
+            {
+                "CORECON RJ",
                 GetFileVersion(CORECONRJ),
-                GetFileModDate(CORECONRJ) 
-            } } };
-            var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            var response = await update.ExecuteAsync();
+                GetFileModDate(CORECONRJ)
+            } }
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
-            
-            WriteRange = "A3:C3";
-            valueRange = new ValueRange { Values = new List<IList<object>> { new List<object> 
-            { 
-                "CORECON PR", 
+            if (GetFileVersion(CORECONPR) != "O caminho especificado não aponta para um arquivo válido.")
+            {
+                string WriteRange = "A3:C3";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
+            {
+                "CORECON PR",
                 GetFileVersion(CORECONPR),
                 GetFileModDate(CORECONPR)
-            } } };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+            } }
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
-            WriteRange = "A4:C4";
-            valueRange = new ValueRange
+            if (GetFileVersion(CORECONDF) != "O caminho especificado não aponta para um arquivo válido.")
             {
-                Values = new List<IList<object>> { new List<object>
+                string WriteRange = "A4:C4";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
             {
                 "CORECON DF",
                 GetFileVersion(CORECONDF),
                 GetFileModDate(CORECONDF)
             } }
-            };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
-            WriteRange = "A5:C5";
-            valueRange = new ValueRange
+            if (GetFileVersion(CORECONSC) != "O caminho especificado não aponta para um arquivo válido.")
             {
-                Values = new List<IList<object>> { new List<object>
+                string WriteRange = "A5:C5";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
             {
                 "CORECON SC",
                 GetFileVersion(CORECONSC),
                 GetFileModDate(CORECONSC)
             } }
-            };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
-            WriteRange = "A6:C6";
-            valueRange = new ValueRange
+            if (GetFileVersion(CORECONBA) != "O caminho especificado não aponta para um arquivo válido.")
             {
-                Values = new List<IList<object>> { new List<object>
+                string WriteRange = "A6:C6";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
             {
                 "CORECON BA",
                 GetFileVersion(CORECONBA),
                 GetFileModDate(CORECONBA)
             } }
-            };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
-            WriteRange = "A7:C7";
-            valueRange = new ValueRange
+            if (GetFileVersion(CORECONGO) != "O caminho especificado não aponta para um arquivo válido.")
             {
-                Values = new List<IList<object>> { new List<object>
+                string WriteRange = "A7:C7";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
             {
                 "CORECON GO",
                 GetFileVersion(CORECONGO),
                 GetFileModDate(CORECONGO)
             } }
-            };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
-            WriteRange = "A8:C8";
-            valueRange = new ValueRange
+            if (GetFileVersion(CORECONRR) != "O caminho especificado não aponta para um arquivo válido.")
             {
-                Values = new List<IList<object>> { new List<object>
+                string WriteRange = "A8:C8";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
             {
                 "CORECON RR",
                 GetFileVersion(CORECONRR),
                 GetFileModDate(CORECONRR)
             } }
-            };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
-            WriteRange = "A9:C9";
-            valueRange = new ValueRange
+            if (GetFileVersion(CORECONRS) != "O caminho especificado não aponta para um arquivo válido.")
             {
-                Values = new List<IList<object>> { new List<object>
+                string WriteRange = "A9:C9";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
             {
                 "CORECON RS",
                 GetFileVersion(CORECONRS),
                 GetFileModDate(CORECONRS)
             } }
-            };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
-            WriteRange = "A10:C10";
-            valueRange = new ValueRange
+            if (GetFileVersion(CORECONPE) != "O caminho especificado não aponta para um arquivo válido.")
             {
-                Values = new List<IList<object>> { new List<object>
+                string WriteRange = "A10:C10";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
             {
                 "CORECON PE",
                 GetFileVersion(CORECONPE),
                 GetFileModDate(CORECONPE)
             } }
-            };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
-            WriteRange = "A11:C11";
-            valueRange = new ValueRange
+            if (GetFileVersion(CREARN) != "O caminho especificado não aponta para um arquivo válido.")
             {
-                Values = new List<IList<object>> { new List<object>
+                string WriteRange = "A11:C11";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
             {
                 "CREA-RN",
                 GetFileVersion(CREARN),
                 GetFileModDate(CREARN)
             } }
-            };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
-            WriteRange = "A12:C12";
-            valueRange = new ValueRange
+            if (GetFileVersion(CREFITOSE) != "O caminho especificado não aponta para um arquivo válido.")
             {
-                Values = new List<IList<object>> { new List<object>
+                string WriteRange = "A12:C12";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
             {
                 "CREFITO-SE",
                 GetFileVersion(CREFITOSE),
                 GetFileModDate(CREFITOSE)
             } }
-            };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+                };
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
+                
 
-            WriteRange = "A13:C13";
-            valueRange = new ValueRange
+            if (GetFileVersion(ONR) != "O caminho especificado não aponta para um arquivo válido.")
             {
-                Values = new List<IList<object>> { new List<object>
+                string WriteRange = "A13:C13";
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { new List<object>
             {
                 "ONR",
                 GetFileVersion(ONR),
                 GetFileModDate(ONR)
             } }
-            };
-            update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            response = await update.ExecuteAsync();
+                };
 
+                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                var response = await update.ExecuteAsync();
+            }
 
 
         }
         private static void SetTimer()
         {
-            
+
             TicTock = new Timer(10000);
-            
+
             TicTock.Elapsed += OnTimedEvent;
             TicTock.AutoReset = true;
             TicTock.Enabled = true;
@@ -291,7 +334,7 @@ namespace Main
 
             catch (IOException)
             {
-                
+
                 return "O caminho especificado não aponta para um arquivo válido.";
             }
             catch (ArgumentException)
@@ -300,7 +343,7 @@ namespace Main
             }
 
         }
-     
+
         public static string GetFileModDate(string fileName)
         {
             try
@@ -314,7 +357,7 @@ namespace Main
                 {
                     return ModDate;
                 }
-                
+
             }
             catch (IOException)
             {
