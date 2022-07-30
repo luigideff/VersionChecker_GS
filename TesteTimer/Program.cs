@@ -26,7 +26,7 @@ namespace Main
        
         public static async Task Main(string[] args)
         {
-
+            
             Console.WriteLine("Atualizando planilha de versão dos clientes...");            
 
             await AtualizarPlanilha();

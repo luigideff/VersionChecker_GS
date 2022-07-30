@@ -10,7 +10,10 @@
     <Product>VersionChecker_GS</Product>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
+    <Version>1.1.0</Version>
   </PropertyGroup>
+
+
 
   <ItemGroup>
     <PackageReference Include="Google.Apis.Sheets.v4" Version="1.57.0.2657" />
@@ -19,15 +22,12 @@
 
   <ItemGroup>
     <None Update="App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="gscred.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="paths.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="spreadsheetid.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="E:\Desktop\icon.png">
