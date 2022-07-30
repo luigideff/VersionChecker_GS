@@ -8,37 +8,30 @@ using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using System.Timers;
+using System.Configuration;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace Main
 {
     class Program
     {
         private static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
-        private const string SpreadsheetId = "1Wz3oQ19JQTBDAlhJLBVZBpqFcYOffpGp3iLPpnmAync";
+        //  private const string SpreadsheetId = "1Wz3oQ19JQTBDAlhJLBVZBpqFcYOffpGp3iLPpnmAync";
+        private static string SpreadsheetId = ConfigurationManager.AppSettings["SpreadsheetID"];
+        private static string InitialColumn = ConfigurationManager.AppSettings["InitialColumn"];
+        private static string FinalColumn = ConfigurationManager.AppSettings["FinalColumn"];
         private const string GoogleCredentialsFileName = "gscred.json";
         private const string ReadRange = "A:B";
-        private const string Cliente1 = @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenvdesc.dll";
-        private const string Cliente2 = @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenvdesc.dll";
-        private const string Cliente3 = @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenvdesc.dll";
-        private const string Cliente4 = @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenvdesc.dll";
-        private const string Cliente5 = @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenvdesc.dll";
-        private static Timer TicTock;
 
-        [DllImport("User32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool ShowWindow([In] IntPtr hWnd, [In] int nCmdShow);
-
+       
         public static async Task Main(string[] args)
         {
-            IntPtr handle = Process.GetCurrentProcess().MainWindowHandle;
-            ShowWindow(handle, 6);
 
-            Console.WriteLine("Atualizando planilha de versão dos clientes...");
+            Console.WriteLine("Atualizando planilha de versão dos clientes...");            
+
             await AtualizarPlanilha();
             //SetTimer();
-            //Console.WriteLine("Planilha atualizada");
+            Console.WriteLine("Planilha atualizada");
             //Console.ReadLine();
         }
 
@@ -100,107 +93,38 @@ namespace Main
 
         private static async Task WriteAsync(SpreadsheetsResource.ValuesResource valuesResource)
         {
+            List<string> paths = File.ReadAllLines("paths.txt").ToList();
 
-            if (GetFileVersion(Cliente1) != "O caminho especificado não aponta para um arquivo válido.")
+            int line = 2;
+                foreach (string path in paths)
             {
-                string WriteRange = "A2:C2";
-                var valueRange = new ValueRange
+                string[] vect = path.Split(';');
+                if (GetFileVersion(vect[1]) != "O caminho especificado não aponta para um arquivo válido.")
                 {
-                    Values = new List<IList<object>> { new List<object>
+
+                    string WriteRange = $"{InitialColumn}{line}:{FinalColumn}{line}";
+                    var valueRange = new ValueRange
+                    {
+                        Values = new List<IList<object>> { new List<object>
             {
-                "Cliente 1",
-                GetFileVersion(Cliente1),
-                GetFileModDate(Cliente1)
+                vect[0],
+                GetFileVersion(vect[1]),
+                GetFileModDate(vect[1])
             } }
-                };
-                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-                var response = await update.ExecuteAsync();
+                    };
+                    var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
+                    update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+                    var response = await update.ExecuteAsync();
+
+                }
+                line++;
+
             }
 
-            if (GetFileVersion(Cliente2) != "O caminho especificado não aponta para um arquivo válido.")
-            {
-                string WriteRange = "A3:C3";
-                var valueRange = new ValueRange
-                {
-                    Values = new List<IList<object>> { new List<object>
-            {
-                "Cliente 2",
-                GetFileVersion(Cliente2),
-                GetFileModDate(Cliente2)
-            } }
-                };
-                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-                var response = await update.ExecuteAsync();
-            }
-
-            if (GetFileVersion(Cliente3) != "O caminho especificado não aponta para um arquivo válido.")
-            {
-                string WriteRange = "A4:C4";
-                var valueRange = new ValueRange
-                {
-                    Values = new List<IList<object>> { new List<object>
-            {
-                "Cliente 3",
-                GetFileVersion(Cliente3),
-                GetFileModDate(Cliente3)
-            } }
-                };
-                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-                var response = await update.ExecuteAsync();
-            }
-
-            if (GetFileVersion(Cliente4) != "O caminho especificado não aponta para um arquivo válido.")
-            {
-                string WriteRange = "A5:C5";
-                var valueRange = new ValueRange
-                {
-                    Values = new List<IList<object>> { new List<object>
-            {
-                "Cliente 4",
-                GetFileVersion(Cliente4),
-                GetFileModDate(Cliente4)
-            } }
-                };
-                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-                var response = await update.ExecuteAsync();
-            }
-
-            if (GetFileVersion(Cliente5) != "O caminho especificado não aponta para um arquivo válido.")
-            {
-                string WriteRange = "A6:C6";
-                var valueRange = new ValueRange
-                {
-                    Values = new List<IList<object>> { new List<object>
-            {
-                "Cliente 5",
-                GetFileVersion(Cliente5),
-                GetFileModDate(Cliente5)
-            } }
-                };
-                var update = valuesResource.Update(valueRange, SpreadsheetId, WriteRange);
-                update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-                var response = await update.ExecuteAsync();
-            }
 
         }
-        private static void SetTimer()
-        {
 
-            TicTock = new Timer(10000);
 
-            TicTock.Elapsed += OnTimedEvent;
-            TicTock.AutoReset = true;
-            TicTock.Enabled = true;
-        }
-
-        public static void OnTimedEvent(Object source, ElapsedEventArgs e)
-        {
-            AtualizarPlanilha();
-        }
 
         public static string GetFileVersion(string filepath)
         {

@@ -14,10 +14,20 @@
 
   <ItemGroup>
     <PackageReference Include="Google.Apis.Sheets.v4" Version="1.57.0.2657" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="gscred.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="paths.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="spreadsheetid.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="E:\Desktop\icon.png">

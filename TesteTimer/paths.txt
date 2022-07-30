@@ -1,0 +1,4 @@
+Traktor;C:\Program Files\Native Instruments\Traktor Pro 3\Traktor.exe
+RekordBox;C:\Program Files\Pioneer\rekordbox 6.6.0\rekordbox.exe
+Ableton;C:\ProgramData\Ableton\Live 10 Suite\Program\Ableton Live 10 Suite.exe
+The Witcher;C:\GOG Games\The Witcher 3 - Wild Hunt\bin\x64\witcher3.exe
